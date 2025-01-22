@@ -36,29 +36,5 @@ Database_url = "Your database URL"
 ## 5. Project Structure
 
 The project is organized as follows:
-
-  |---drizzle/
-  ├── src/
-  │   ├── config/
-  │   │   └── db.config.ts        # Database connection
-  │   ├── db/
-  │   │   └── models/             # Database models
-  │   ├── schema/
-  │   │   └── schema.ts           # GraphQL schema definitions and resolvers
-  │   ├── server.ts               # Apollo Server setup
-  │   ├── helpers/                # Helper functions
-  │   ├── middleware/             # Middleware functions
-  │   ├── repositories/           # Repositories for data access
-  │   ├── resolvers/              # GraphQL resolvers
-  │   ├── routes/                 # Express or other routes
-  │   ├── services/               # Service layer for business logic
-  │   ├── specs/                  # Test specifications
-  │   ├── types/                  # TypeScript types
-  │   └── index.ts                # Main entry point
-  ├── .env                        # Environment variables
-  ├── package.json                # NPM dependencies and scripts
-  ├── tsconfig.json               # TypeScript configuration
-  └── drizzle.config.ts           # Drizzle ORM configuration
-
-
+drizzle/ ├── src/ │ ├── config/ │ │ └── db.config.ts # Database connection │ ├── db/ │ │ └── models/ # Database models │ ├── schema/ │ │ └── schema.ts # GraphQL schema definitions and resolvers │ ├── server.ts # Apollo Server setup │ ├── helpers/ # Helper functions │ ├── middleware/ # Middleware functions │ ├── repositories/ # Repositories for data access │ ├── resolvers/ # GraphQL resolvers │ ├── routes/ # Express or other routes │ ├── services/ # Service layer for business logic │ ├── specs/ # Test specifications │ ├── types/ # TypeScript types │ └── index.ts # Main entry point ├── .env # Environment variables ├── package.json # NPM dependencies and scripts ├── tsconfig.json # TypeScript configuration └── drizzle.config.ts # Drizzle ORM configuration
 
