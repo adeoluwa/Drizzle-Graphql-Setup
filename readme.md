@@ -33,8 +33,32 @@ Create a .env file in the root of your project and add your database connection 
 Database_url = "Your database URL"
 ```
 
-## 5. Project Structure
 
-The project is organized as follows:
-drizzle/ ├── src/ │ ├── config/ │ │ └── db.config.ts # Database connection │ ├── db/ │ │ └── models/ # Database models │ ├── schema/ │ │ └── schema.ts # GraphQL schema definitions and resolvers │ ├── server.ts # Apollo Server setup │ ├── helpers/ # Helper functions │ ├── middleware/ # Middleware functions │ ├── repositories/ # Repositories for data access │ ├── resolvers/ # GraphQL resolvers │ ├── routes/ # Express or other routes │ ├── services/ # Service layer for business logic │ ├── specs/ # Test specifications │ ├── types/ # TypeScript types │ └── index.ts # Main entry point ├── .env # Environment variables ├── package.json # NPM dependencies and scripts ├── tsconfig.json # TypeScript configuration └── drizzle.config.ts # Drizzle ORM configuration
+# Project Structure
+
+- **src/**
+  - **config/**
+    - `db.config.ts` – Database connection configuration.
+  - **db/**
+    - **models/** – Contains database models.
+  - **schema/**
+    - `schema.ts` – GraphQL schema definitions and resolvers.
+  - **server.ts** – Apollo Server setup for GraphQL.
+  - **helpers/** – Helper functions used throughout the application.
+  - **middleware/** – Middleware functions for request handling.
+  - **repositories/** – Repositories for data access (handles database interactions).
+  - **resolvers/** – GraphQL resolvers to handle requests.
+  - **routes/** – Express (or other framework) routes for API endpoints.
+  - **services/** – Service layer for business logic.
+  - **specs/** – Test specifications or related files.
+  - **types/** – TypeScript types and interfaces.
+  - `index.ts` – Main entry point of the application.
+
+- **.env** – Environment variables for configuration.
+
+- **package.json** – NPM dependencies, scripts, and project metadata.
+
+- **tsconfig.json** – TypeScript configuration for compiling TypeScript files.
+
+- **drizzle.config.ts** – Drizzle ORM configuration file.
 
