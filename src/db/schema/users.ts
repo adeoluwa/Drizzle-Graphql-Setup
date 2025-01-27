@@ -12,14 +12,13 @@ export const users = table(
     email: t.varchar().notNull(),
     password: t.varchar().unique().notNull(),
     role: rolesEnum().default('artist'),
-    created_at: t.timestamp('createdAt').defaultNow().notNull(),
+    created_at: t.timestamp({mode: "date", withTimezone: true }).notNull().defaultNow(),
     updated_at: t
-      .timestamp('updatedAt')
+      .timestamp()
       .defaultNow()
       .$onUpdate(() => new Date())
-      .notNull(),
-    deleted_at: t.timestamp(),
-  },
+      .notNull()
+   },
   (table) => {
     return {
       emailIndex: t.uniqueIndex('email_idx').on(table.email),

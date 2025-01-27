@@ -8,6 +8,13 @@
       "when": 1737653635019,
       "tag": "0000_illegal_omega_sentinel",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1737993055545,
+      "tag": "0001_puzzling_firestar",
+      "breakpoints": true
     }
   ]
 }

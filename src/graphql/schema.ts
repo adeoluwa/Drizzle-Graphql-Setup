@@ -34,7 +34,7 @@ export const typeDefs = gql`
  }
 
  type Mutation {
-   createUser(input: CreateUserInput!): User!
+   createUser(input: CreateUserInput!): User
    login(email: String!, password: String!): LoginResponse!
  }
 

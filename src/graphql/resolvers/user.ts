@@ -2,7 +2,7 @@ import { db } from '../../db/db';
 import { users } from '../../db/schema';
 import { eq } from 'drizzle-orm';
 import Helper from '../../helpers';
-import { error as logError } from '../../helpers/logger';
+import { info, error as logError } from '../../helpers/logger';
 import { authenticateUser } from '../../services/auth.service';
 
 export const userResolver = {
@@ -25,31 +25,33 @@ export const userResolver = {
     getAllUsers: async () => {
       try {
         const allUsers = await db.select().from(users).execute();
+        info({ message: 'fetched users', params: { allUsers } });
 
         if (!allUsers.length) {
-          throw new Error('No users found');
+          // throw new Error('No users found');
+          return [];
         }
 
         return allUsers;
       } catch (error) {
-        let errorMessage = "Error fetching users"
+        let errorMessage = 'Error fetching users';
 
         if (error instanceof Error && error.name === 'AggregateError') {
           errorMessage =
-            "Failed to connect to the database. Please check your database connection and network settings."
+            'Failed to connect to the database. Please check your database connection and network settings.';
         } else if (error instanceof Error) {
-          errorMessage = `Error fetching users: ${error.message}`
+          errorMessage = `Error fetching users: ${error.message}`;
         }
 
-        if(error instanceof Error){
+        if (error instanceof Error) {
           logError({
-            message:"Error fetching users",
-            params:{
-              name:error.name,
-              message:errorMessage,
-              stack:error.stack
-            }
-          })
+            message: 'Error fetching users',
+            params: {
+              name: error.name,
+              message: errorMessage,
+              stack: error.stack,
+            },
+          });
         }
 
         throw new Error(errorMessage);
@@ -79,7 +81,10 @@ export const userResolver = {
         .limit(1)
         .execute();
 
-      if (existingUser) throw new Error('Email already in use');
+      if (existingUser.length > 0) {
+        info({ message: 'Account Found', params: { existingUser } });
+        throw new Error('Email already in use');
+      }
 
       const hashedPassword = Helper.hash(input.password, 10);
 
@@ -92,6 +97,8 @@ export const userResolver = {
             email: input.email,
             password: hashedPassword,
             role: input.role || 'artist',
+            created_at: new Date(),
+            updated_at: new Date(),
           })
           .returning()
           .execute();

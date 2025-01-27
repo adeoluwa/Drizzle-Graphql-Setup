@@ -2,6 +2,8 @@ import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import { error as logError } from './logger';
 import path from 'path';
+import dotenv from 'dotenv';
+dotenv.config();
 
 export default class Helper {
   private static getSecretKey(): string {

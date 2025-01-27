@@ -1,20 +1,27 @@
-import { db } from "../db/db";
-import * as schema from '../db/schema'; // Adjust the import path as necessary
+import postgres from 'postgres';
+import dotenv from 'dotenv';
+dotenv.config();
 
-async function testConnection() {
+const DB_URl = process.env.DB_URL || "postgresql://postgres.sevhbtmkndmeuvsjxgjm:BNoOCPUZruRAGxbc@aws-0-eu-central-1.pooler.supabase.com:5432/postgres"
+
+console.log("DB Connection string: ", DB_URl)
+
+
+async function testPostgresConnection() {
   try {
-    const result = await db
-      .select({
-        id: schema.users.id,
-        name: schema.users.first_name,
-        email: schema.users.email,
-      })
-      .from(schema.users) // Use the users table from the schema
-      .execute();
-    console.log('Users:', result);
+    const sql = postgres(DB_URl, {
+      ssl: { rejectUnauthorized: false }, // Ensure SSL works for Supabase
+    });
+
+    // Test a simple query
+    const result = await sql`SELECT 1+1 AS result`;
+    console.log('Connection successful:', result);
+
+    // Close the connection
+    await sql.end();
   } catch (error) {
-    console.error('Database error:', error);
+    console.error('Error connecting to database:', error);
   }
 }
 
-testConnection();
+testPostgresConnection();
