@@ -107,21 +107,18 @@ export const userResolver = {
 
     updateProfile: async (
       _: any,
+
       {
-        first_name,
-        last_name,
-        password,
-      }: { first_name?: string; last_name?: string; password?: string },
+        input,
+      }: { input: { first_name?: string; last_name?: string; password?: string } },
       context: { user: any },
     ) => {
       if (!context.user) throw new Error('User not authenticated');
 
       try {
-        const updatedUser = await UserService.updateUserProfile(context.user.id, {
-          first_name,
-          last_name,
-          password,
-        });
+        const updatedUser = await UserService.updateUserProfile(context.user.id, input);
+
+        info({ message: 'Updated User profile', params: { updatedUser } });
 
         return updatedUser;
       } catch (error) {

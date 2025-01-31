@@ -41,6 +41,7 @@
     "@apollo/server": "^4.11.3",
     "@types/jsonwebtoken": "^9.0.7",
     "apollo-server-express": "^3.13.0",
+    "awilix": "^12.0.4",
     "bcrypt": "^5.1.1",
     "dotenv": "^16.4.7",
     "drizzle-graphql": "^0.8.5",
