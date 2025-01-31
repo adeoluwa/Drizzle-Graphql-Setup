@@ -1,10 +1,11 @@
 import { ApolloServer } from '@apollo/server';
 import { startStandaloneServer } from '@apollo/server/standalone';
 import postgres from 'postgres';
-import { info, error as logError, warn } from './helpers/logger';
+import { logger} from './helpers/logger';
 import { makeExecutableSchema } from '@graphql-tools/schema';
 import { typeDefs } from './graphql/schema';
 import { resolvers } from './graphql/resolvers';
+import { container } from './container';
 import dotenv from 'dotenv';
 import { IncomingMessage } from 'http';
 import jwt from 'jsonwebtoken';
@@ -19,10 +20,10 @@ const sql = postgres(process.env.DB_URL!, {
 async function testDbConnection() {
   try {
     await sql`SELECT 1`; // Simple query to test connection
-    info({ message: 'Database connection successful!' });
+    logger.info({ message: 'Database connection successful!' });
   } catch (err) {
     if (err instanceof Error) {
-      logError({
+      logger.error({
         message: 'Failed to connect to the database!',
         params: {
           name: err.name,
@@ -36,12 +37,12 @@ async function testDbConnection() {
 }
 
 if (!process.env.DB_URL) {
-  logError({ message: 'DB_URL is not defined in environment variables!' });
+  logger.debug({ message: 'DB_URL is not defined in environment variables!' });
   process.exit(1);
 }
 
 if (!sql) {
-  logError({ message: 'Failed to initialize PostgreSQL client' });
+  logger.error({ message: 'Failed to initialize PostgreSQL client' });
   process.exit(1);
 }
 
@@ -70,11 +71,14 @@ async function startServer() {
           throw new Error("Invalid Token!")
         }
       } else {
-        warn({ message: 'No valid Bearer token provided' });
+        logger.warn({ message: 'No valid Bearer token provided' });
       }
+
+      const scopedContainer = container.createScope();
 
       return {
         user,
+        container: scopedContainer
       };
     },
     listen: { port: 5000 },

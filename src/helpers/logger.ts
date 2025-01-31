@@ -39,9 +39,16 @@ const logMessage = (input: LogInputType, severity: Serverity) => {
   }
 };
 
-const info = async(input:LogInputType) => logMessage(input, 'INFO');
-const debug = async (input: LogInputType) => logMessage(input, "DEBUG");
-const error = async (input: LogInputType) => logMessage(input, "ERROR");
-const warn = async (input: LogInputType) => logMessage(input, "WARNING");
+const info = async (input: LogInputType) => logMessage(input, 'INFO');
+const debug = async (input: LogInputType) => logMessage(input, 'DEBUG');
+const error = async (input: LogInputType) => logMessage(input, 'ERROR');
+const warn = async (input: LogInputType) => logMessage(input, 'WARNING');
 
-export {info, debug, error, warn};
+const logger = {
+  info,
+  debug,
+  error,
+  warn,
+};
+
+export { logger };

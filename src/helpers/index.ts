@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
-import { error as logError } from './logger';
+import {logger} from './logger';
 import path from 'path';
 import dotenv from 'dotenv';
 dotenv.config();
@@ -36,7 +36,7 @@ export default class Helper {
       throw new Error('Invalid Token Format, expected an object');
     } catch (error) {
       if (error instanceof Error) {
-        logError({
+        logger.error({
           message: 'Token verification failed',
           params: {
             name: error.name,

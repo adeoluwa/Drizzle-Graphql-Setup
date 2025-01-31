@@ -3,7 +3,7 @@ import * as userSchema from '../db/schema/users';
 import { eq } from 'drizzle-orm';
 import Helper from '../helpers';
 
-export const UserService = {
+export class UserService{
   async getUserById(userId: string) {
     const user = await db
       .select()
@@ -13,11 +13,11 @@ export const UserService = {
       .execute();
 
     return user[0] || null;
-  },
+  }
 
   async getAllUsers() {
     return await db.select().from(userSchema.users).execute();
-  },
+  }
 
   async getUserByEmail(email: string) {
     const user = await db
@@ -28,7 +28,7 @@ export const UserService = {
       .execute();
 
     return user[0] || null;
-  },
+  }
 
   async createUser(input: {
     first_name: string;
@@ -54,7 +54,7 @@ export const UserService = {
       .execute();
 
     return newUser[0];
-  },
+  }
 
   async updateUserProfile(
     userId: string,
@@ -93,5 +93,5 @@ export const UserService = {
       }
       throw error;
     }
-  },
+  }
 };
