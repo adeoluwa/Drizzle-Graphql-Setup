@@ -1,5 +1,4 @@
 import 'dotenv/config';
-import { pgTable, integer, text } from "drizzle-orm/pg-core";
 import { drizzle } from 'drizzle-orm/postgres-js';
 import { seed } from 'drizzle-seed';
 import { users } from '../db/schema/users';

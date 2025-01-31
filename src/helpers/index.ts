@@ -7,9 +7,9 @@ dotenv.config();
 
 export default class Helper {
   private static getSecretKey(): string {
-    const secret = process.env.APP_KEY;
+    const secret = process.env.JWT_SECRET;
 
-    if (!secret) throw new Error('APP_KEY env not set!');
+    if (!secret) throw new Error('JWT_SECRET env not set!');
 
     return secret;
   }
